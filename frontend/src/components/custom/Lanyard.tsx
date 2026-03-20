@@ -1,17 +1,27 @@
 /* eslint-disable react/no-unknown-property */
- 'use client';
 import { useEffect, useRef, useState } from 'react';
-import { Canvas, extend, useFrame } from '@react-three/fiber';
+import { Canvas, extend, useFrame, RootState } from '@react-three/fiber';
 import { useGLTF, useTexture, Environment, Lightformer } from '@react-three/drei';
 import { BallCollider, CuboidCollider, Physics, RigidBody, useRopeJoint, useSphericalJoint } from '@react-three/rapier';
 import { MeshLineGeometry, MeshLineMaterial } from 'meshline';
 import * as THREE from 'three';
-// --- YOUR ASSETS ---
-import cardGLB from './card.glb';
-import lanyardImage from './lanyard.png'; // The texture for the string
-import cardPhotoImage from './card-photo.jpeg'; // Your actual photo for the card face!
 
+import cardGLB from './card.glb';
+import lanyardImage from './lanyard.png'; 
+import cardPhotoImage from './card-photo.jpeg'; 
+
+// Register the custom geometry with React-Three-Fiber
 extend({ MeshLineGeometry, MeshLineMaterial });
+
+// Officially tell TypeScript that these custom tags exist
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      meshLineGeometry: any;
+      meshLineMaterial: any;
+    }
+  }
+}
 
 export default function Lanyard({ position = [0, 0, 30], gravity = [0, -40, 0], fov = 20, transparent = true }) {
   const [isMobile, setIsMobile] = useState(() => typeof window !== 'undefined' && window.innerWidth < 768);
@@ -28,7 +38,8 @@ export default function Lanyard({ position = [0, 0, 30], gravity = [0, -40, 0], 
         camera={{ position: position as any, fov: fov }}
         dpr={[1, isMobile ? 1.5 : 2]}
         gl={{ alpha: transparent }}
-        onCreated={({ gl }) => gl.setClearColor(new THREE.Color(0x000000), transparent ? 0 : 1)}
+        // Explicitly typed the 'gl' parameter
+        onCreated={({ gl }: { gl: THREE.WebGLRenderer }) => gl.setClearColor(new THREE.Color(0x000000), transparent ? 0 : 1)}
       >
         <ambientLight intensity={Math.PI} />
         <Physics gravity={gravity as any} timeStep={isMobile ? 1 / 30 : 1 / 60}>
@@ -46,28 +57,25 @@ export default function Lanyard({ position = [0, 0, 30], gravity = [0, -40, 0], 
 }
 
 function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }) {
-  const band = useRef<any>();
-  const fixed = useRef<any>();
-  const j1 = useRef<any>();
-  const j2 = useRef<any>();
-  const j3 = useRef<any>();
-  const card = useRef<any>();
+  const band = useRef<any>(null);
+  const fixed = useRef<any>(null);
+  const j1 = useRef<any>(null);
+  const j2 = useRef<any>(null);
+  const j3 = useRef<any>(null);
+  const card = useRef<any>(null);
   
   const vec = new THREE.Vector3();
   const ang = new THREE.Vector3();
   const rot = new THREE.Vector3();
   const dir = new THREE.Vector3();
   
-  const segmentProps = { type: 'dynamic' as const, canSleep: true, colliders: false, angularDamping: 4, linearDamping: 4 };
+  // FIXED: Using "as const" so TS doesn't convert false into a generic boolean
+  const segmentProps = { type: 'dynamic' as const, canSleep: true, colliders: false as const, angularDamping: 4, linearDamping: 4 };
   
-  // Load 3D Geometry
   const { nodes, materials } = useGLTF(cardGLB) as any;
+  const texture = useTexture(lanyardImage); 
+  const cardFaceTexture = useTexture(cardPhotoImage); 
   
-  // Load Textures
-  const texture = useTexture(lanyardImage); // The string
-  const cardFaceTexture = useTexture(cardPhotoImage); // Your photo!
-  
-  // Fix texture alignment for the GLB model
   cardFaceTexture.flipY = false;
   cardFaceTexture.colorSpace = THREE.SRGBColorSpace;
 
@@ -87,7 +95,8 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }) {
     }
   }, [hovered, dragged]);
 
-  useFrame((state, delta) => {
+  // FIXED: Explicitly typed 'state' and 'delta'
+  useFrame((state: RootState, delta: number) => {
     if (dragged) {
       vec.set(state.pointer.x, state.pointer.y, 0.5).unproject(state.camera);
       dir.copy(vec).sub(state.camera.position).normalize();
@@ -135,13 +144,13 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }) {
             position={[0, -1.2, -0.05]}
             onPointerOver={() => hover(true)}
             onPointerOut={() => hover(false)}
-            onPointerUp={e => (e.target.releasePointerCapture(e.pointerId), drag(false))}
-            onPointerDown={e => (
-              e.target.setPointerCapture(e.pointerId),
+            // FIXED: Typed 'e' and casted target to HTMLElement
+            onPointerUp={(e: any) => ((e.target as HTMLElement).releasePointerCapture(e.pointerId), drag(false))}
+            onPointerDown={(e: any) => (
+              (e.target as HTMLElement).setPointerCapture(e.pointerId),
               drag(new THREE.Vector3().copy(e.point).sub(vec.copy(card.current.translation())))
             )}
           >
-            {/* THIS MESH HOLDS YOUR CUSTOM PHOTO */}
             <mesh geometry={nodes.card.geometry}>
               <meshPhysicalMaterial 
                 map={cardFaceTexture} 
