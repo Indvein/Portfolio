@@ -8,7 +8,7 @@ function UnrollingTimelineItem({ item, index }: { item: any, index: number }) {
 
   return (
     <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, margin: "-100px" }} transition={{ duration: 0.6, delay: index * 0.2 }} className="mb-12 last:mb-0 relative group cursor-pointer" onMouseEnter={() => setIsOpen(true)} onMouseLeave={() => setIsOpen(false)}>
-      <div className="absolute -left-[37px] md:-left-[53px] top-1.5 w-3 h-3 bg-neutral-300 dark:bg-neutral-800 border-2 border-white dark:border-[#070707] rounded-full group-hover:bg-black dark:group-hover:bg-white group-hover:shadow-[0_0_15px_rgba(0,0,0,0.3)] dark:group-hover:shadow-[0_0_15px_rgba(255,255,255,0.8)] transition-all duration-300" />
+      <div className="absolute -left-9.25 md:-left-13.25 top-1.5 w-3 h-3 bg-neutral-300 dark:bg-neutral-800 border-2 border-white dark:border-[#070707] rounded-full group-hover:bg-black dark:group-hover:bg-white group-hover:shadow-[0_0_15px_rgba(0,0,0,0.3)] dark:group-hover:shadow-[0_0_15px_rgba(255,255,255,0.8)] transition-all duration-300" />
 
       <div className="py-2">
         <p className="text-xs font-mono text-neutral-500 mb-2 tracking-widest">{item.year}</p>

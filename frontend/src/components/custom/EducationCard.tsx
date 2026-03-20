@@ -13,7 +13,7 @@ export default function EducationCard() {
     >
       {/* The Hidden Image that reveals on hover */}
       <div className="absolute inset-0 w-full h-full opacity-0 group-hover:opacity-100 transition-opacity duration-700 ease-in-out z-0">
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent z-10" />
+        <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/50 to-transparent z-10" />
         <img 
           src={college} 
           alt="University Campus" 
