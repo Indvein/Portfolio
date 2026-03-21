@@ -1,9 +1,14 @@
+import { useState } from "react";
 import { Github, Linkedin } from "lucide-react";
 import self from "../../assets/self.jpg";
 
 export default function AboutMe() {
+  // 1. Add state to track if the image has been tapped on mobile
+  const [isColor, setIsColor] = useState(false);
+
   return (
-    <section id="about" className="py-24 mt-12 mb-24 border-t border-neutral-300 dark:border-neutral-900 transition-colors duration-500">
+    // 2. Fixed mobile spacing: Reduced padding and margins for mobile screens
+    <section id="about" className="py-12 md:py-24 mt-4 md:mt-12 mb-12 md:mb-24 border-t border-neutral-300 dark:border-neutral-900 transition-colors duration-500">
       <div className="flex flex-col md:flex-row gap-16 items-center md:items-start">
         
         <div className="relative flex-shrink-0 mt-8 md:mt-0">
@@ -11,8 +16,12 @@ export default function AboutMe() {
             HARSH
           </div>
           
-          <div className="w-64 h-64 md:w-[22rem] md:h-[22rem] rounded-full overflow-hidden border-2 border-neutral-300 dark:border-neutral-800 relative grayscale hover:grayscale-0 transition-all duration-700 ease-out shadow-2xl">
-            <img src={self} alt="Harsh Jha Placeholder" className="w-full h-full object-cover" />
+          {/* 3. Added the onClick toggle and dynamic grayscale classes */}
+          <div 
+            onClick={() => setIsColor(!isColor)}
+            className={`w-64 h-64 md:w-[22rem] md:h-[22rem] rounded-full overflow-hidden border-2 border-neutral-300 dark:border-neutral-800 relative cursor-pointer transition-all duration-700 ease-out shadow-2xl md:hover:grayscale-0 ${isColor ? 'grayscale-0' : 'grayscale'}`}
+          >
+            <img src={self} alt="Harsh Jha" className="w-full h-full object-cover" />
           </div>
 
           <div className="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-8 bg-white text-black px-4 py-2 text-xl md:text-2xl font-black tracking-widest uppercase border-2 border-neutral-300 dark:border-white z-10 shadow-2xl transition-colors">
@@ -20,7 +29,7 @@ export default function AboutMe() {
           </div>
         </div>
 
-        <div className="flex flex-col flex-grow md:pt-8">
+        <div className="flex flex-col grow md:pt-8">
           <h2 className="text-4xl md:text-5xl font-black text-black dark:text-white mb-6 uppercase tracking-tighter transition-colors">
             About Me
           </h2>
@@ -29,10 +38,10 @@ export default function AboutMe() {
           </p>
 
           <div className="flex flex-wrap gap-4">
-            <a href="https://github.com" target="_blank" rel="noreferrer" className="flex items-center gap-3 px-6 py-3 border border-neutral-400 dark:border-neutral-600 rounded-none text-sm font-bold tracking-widest uppercase text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black dark:hover:border-white transition-all duration-300">
+            <a href="https://github.com/Indvein" target="_blank" rel="noreferrer" className="flex items-center gap-3 px-6 py-3 border border-neutral-400 dark:border-neutral-600 rounded-none text-sm font-bold tracking-widest uppercase text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black dark:hover:border-white transition-all duration-300">
               <Github size={18} /> GitHub
             </a>
-            <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="flex items-center gap-3 px-6 py-3 border border-neutral-400 dark:border-neutral-600 rounded-none text-sm font-bold tracking-widest uppercase text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black dark:hover:border-white transition-all duration-300">
+            <a href="https://www.linkedin.com/in/harsh-jha-72a6562a6/" target="_blank" rel="noreferrer" className="flex items-center gap-3 px-6 py-3 border border-neutral-400 dark:border-neutral-600 rounded-none text-sm font-bold tracking-widest uppercase text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black dark:hover:border-white transition-all duration-300">
               <Linkedin size={18} /> LinkedIn
             </a>
           </div>
