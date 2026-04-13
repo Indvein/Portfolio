@@ -1,6 +1,19 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { SiReact, SiPython, SiTypescript, SiNodedotjs, SiTailwindcss, SiFramer, SiMongodb, SiMysql, SiTensorflow, SiGit, SiCplusplus } from "react-icons/si";
+import {
+  SiReact,
+  SiPython,
+  SiTypescript,
+  SiNodedotjs,
+  SiTailwindcss,
+  SiFramer,
+  SiMongodb,
+  SiMysql,
+  SiTensorflow,
+  SiGit
+} from "react-icons/si";
+
+import { FaJava } from "react-icons/fa";
 
 // 1. Create a mini-component so each card tracks its own hover state independently
 function SkillCard({ skill, index }: { skill: any, index: number }) {
@@ -42,7 +55,7 @@ export default function Skills() {
     { name: "SQL", Icon: SiMysql, hex: "#4479A1" },
     { name: "Machine Learning", Icon: SiTensorflow, hex: "#FF6F00" },
     { name: "Git", Icon: SiGit, hex: "#F05032" },
-    { name: "C/C++", Icon: SiCplusplus, hex: "#00599C" },
+    { name: "Java", Icon: FaJava, hex: "#00599C" },
   ];
 
   return (

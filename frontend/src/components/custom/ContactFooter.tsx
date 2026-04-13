@@ -85,7 +85,7 @@ export default function ContactFooter() {
 
       <div className="w-full flex flex-col md:flex-row justify-between items-center text-xs font-mono text-neutral-500 dark:text-neutral-600 uppercase tracking-widest mt-24 pt-8 border-t border-neutral-300 dark:border-neutral-900 gap-4 transition-colors">
         <p>{new Date().getFullYear()} Harsh Jha | All Rights Reserved ©</p>
-        <p>Harsh.Dev™</p>
+        
       </div>
     </section>
   );

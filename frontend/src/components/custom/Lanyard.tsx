@@ -1,4 +1,4 @@
-/* eslint-disable react/no-unknown-property */
+import { Suspense } from "react";
 import { useEffect, useRef, useState } from 'react';
 import { Canvas, extend, useFrame, RootState } from '@react-three/fiber';
 import { useGLTF, useTexture, Environment, Lightformer } from '@react-three/drei';
@@ -42,6 +42,7 @@ export default function Lanyard({ position = [0, 0, 30], gravity = [0, -40, 0], 
         onCreated={({ gl }: { gl: THREE.WebGLRenderer }) => gl.setClearColor(new THREE.Color(0x000000), transparent ? 0 : 1)}
       >
         <ambientLight intensity={Math.PI} />
+        
         <Physics gravity={gravity as any} timeStep={isMobile ? 1 / 30 : 1 / 60}>
           <Band isMobile={isMobile} />
         </Physics>
