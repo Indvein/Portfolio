@@ -57,13 +57,13 @@ export default function App() {
               <p className="text-neutral-600 dark:text-neutral-400 max-w-lg text-lg font-light mb-10 pointer-events-auto leading-relaxed transition-colors">I’m a 4th-year CSE student focused on building clean, intuitive web apps with React and Python.</p>
               <div className="flex flex-wrap items-center gap-4 mb-8 pointer-events-auto">
                 <a
-                  href= "https://drive.google.com/file/d/1uBwzEcEbyv6y0Qi1e8wyfJLUz0_enuI8/view?usp=sharing"
+                  href= "https://drive.google.com/file/d/1Ltw2dWwAVvHnbS-2aXLyJBLnuMG23z5b/view?usp=sharing"
                   target="_blank"
                   rel="noreferrer"
                   className="px-8 py-3 bg-black dark:bg-white text-white dark:text-black text-sm font-bold rounded-md hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-colors"
                 >View Resume</a>
                 <a
-                  href="https://drive.google.com/uc?export=download&id=1uBwzEcEbyv6y0Qi1e8wyfJLUz0_enuI8"
+                  href="https://drive.google.com/uc?export=download&id=1Ltw2dWwAVvHnbS-2aXLyJBLnuMG23z5b"
                   className="px-8 py-3 bg-transparent text-black dark:text-white text-sm font-bold rounded-md border border-black dark:border-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-800 transition-colors"
                 >Download Resume</a>
               </div>
