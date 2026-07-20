@@ -59,7 +59,7 @@ export default function Skills() {
   ];
 
   return (
-    <section id="skills" className="py-24 border-t border-neutral-300 dark:border-neutral-900 mt-12 transition-colors duration-500">
+    <section id="skills" className="py-14 border-t border-neutral-300 dark:border-neutral-900 mt-4 transition-colors duration-500">
       <p className="text-xs font-mono text-neutral-500 mb-12 uppercase tracking-widest text-center md:text-left">
         Technical Arsenal
       </p>

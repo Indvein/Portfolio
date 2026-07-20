@@ -54,7 +54,7 @@ export default function App() {
               <p className="text-lg md:text-xl text-neutral-500 dark:text-neutral-400 font-medium mb-2 pointer-events-auto transition-colors">Hello, I'm</p>
               <h1 className="text-5xl md:text-7xl font-bold text-black dark:text-white tracking-tight mb-2 pointer-events-auto transition-colors">Harsh Jha</h1>
               <h2 className="text-3xl md:text-4xl text-neutral-600 dark:text-neutral-500 font-semibold tracking-tight mb-6 pointer-events-auto transition-colors">Software Developer</h2>
-              <p className="text-neutral-600 dark:text-neutral-400 max-w-lg text-lg font-light mb-10 pointer-events-auto leading-relaxed transition-colors">I’m a 4th-year CSE student focused on building clean, intuitive web apps with React and Python.</p>
+              <p className="text-neutral-600 dark:text-neutral-400 max-w-lg text-lg font-light mb-10 pointer-events-auto leading-relaxed transition-colors">I'm a 4th-year CSE student focused on building clean, intuitive web apps with React and Python.</p>
               <div className="flex flex-wrap items-center gap-4 mb-8 pointer-events-auto">
                 <a
                   href= "https://drive.google.com/file/d/1Ltw2dWwAVvHnbS-2aXLyJBLnuMG23z5b/view?usp=sharing"
@@ -73,7 +73,7 @@ export default function App() {
               </div>
             </motion.div>
 
-            <div className="hidden md:flex relative md:w-1/2 md:h-[90vh] z-0 items-center justify-center pointer-events-none">
+            <div className="hidden md:flex relative md:w-1/2 md:h-[90vh] z-0 items-start justify-center pointer-events-none">
               <div className="w-full h-full scale-[0.8] md:scale-100 pointer-events-auto cursor-grab active:cursor-grabbing">
                 {/* 5. Only mount the Lanyard if we are NOT loading, or let it mount behind the scenes.
                     Letting it mount behind the scenes is better so it's ready when the curtain lifts! */}
@@ -82,8 +82,8 @@ export default function App() {
             </div>
 
           </div>
-          <AboutMe />
           <Skills />
+          <AboutMe />
           <ProjectSection />
           <EducationTimeline />
           <ContactFooter />
