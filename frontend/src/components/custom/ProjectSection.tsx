@@ -4,6 +4,8 @@ import { ArrowUpRight, Github } from "lucide-react";
 import stockpie1 from "../../assets/stockpie1.png";
 import folost1 from "../../assets/folost1.png";
 import plant1 from "../../assets/plant2.png";
+import webshield from "../../assets/WebshieldInfoTech.png";
+import chatbot from "../../assets/ChatBot.png";
 
 export default function ProjectSection() {
   const projects = [
@@ -20,6 +22,20 @@ export default function ProjectSection() {
       imageSrc: stockpie1,
       description: "A stock portfolio analysis tool that tracks data, visualizes trends, and helps users understand investments.",
       githubLink: "https://github.com/Indvein/Stockpie",
+    },
+    {
+      title: "Webshield InfoTech",
+      category: "FRONTEND",
+      imageSrc: webshield,
+      description: "A modern, responsive corporate landing page for an IT services company showcasing their expertise and solutions.",
+      liveLink: "https://www.webshieldinfo.com/",
+    },
+    {
+      title: "RAG Chatbot",
+      category: "AI / ML",
+      imageSrc: chatbot,
+      description: "An intelligent AI chatbot utilizing Retrieval-Augmented Generation (RAG) to provide accurate answers based on custom knowledge bases.",
+      githubLink: "https://github.com/Indvein/Rag-Chatbot-",
     },
     {
       title: "Plant Disease AI",

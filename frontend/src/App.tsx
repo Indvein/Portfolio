@@ -10,7 +10,8 @@ import EducationTimeline from "./components/custom/EducationTimeline";
 import ContactFooter from "./components/custom/ContactFooter";
 import Lanyard from "./components/custom/Lanyard";
 import Aurora from "./components/custom/Aurora"; 
-import Loader from "./components/custom/Loader"; // <-- 1. Import Loader
+import Loader from "./components/custom/Loader";
+import ScrollProgress from "./components/custom/ScrollProgress";
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true); // <-- 2. Add loading state
@@ -30,6 +31,7 @@ export default function App() {
 
   return (
     <>
+      <ScrollProgress />
       {/* 3. Drop the Loader right at the top */}
       <Loader onComplete={() => setIsLoading(false)} />
 
@@ -54,7 +56,7 @@ export default function App() {
               <p className="text-lg md:text-xl text-neutral-500 dark:text-neutral-400 font-medium mb-2 pointer-events-auto transition-colors">Hello, I'm</p>
               <h1 className="text-5xl md:text-7xl font-bold text-black dark:text-white tracking-tight mb-2 pointer-events-auto transition-colors">Harsh Jha</h1>
               <h2 className="text-3xl md:text-4xl text-neutral-600 dark:text-neutral-500 font-semibold tracking-tight mb-6 pointer-events-auto transition-colors">Software Developer</h2>
-              <p className="text-neutral-600 dark:text-neutral-400 max-w-lg text-lg font-light mb-10 pointer-events-auto leading-relaxed transition-colors">I'm a 4th-year CSE student focused on building clean, intuitive web apps with React and Python.</p>
+              <p className="text-neutral-600 dark:text-neutral-400 max-w-lg text-lg font-light mb-10 pointer-events-auto leading-relaxed transition-colors">I'm a BTech graduate focused on building clean, intuitive web apps with React and Python.</p>
               <div className="flex flex-wrap items-center gap-4 mb-8 pointer-events-auto">
                 <a
                   href= "https://drive.google.com/file/d/1Ltw2dWwAVvHnbS-2aXLyJBLnuMG23z5b/view?usp=sharing"
