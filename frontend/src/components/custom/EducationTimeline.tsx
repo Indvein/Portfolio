@@ -2,6 +2,8 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import college from "../../assets/college.jpg";
 import school from "../../assets/school.avif";
+import edc from "../../assets/EDC.jpg";
+import voxomos from "../../assets/Voxomos.png";
 
 function UnrollingTimelineItem({ item, index }: { item: any, index: number }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -40,8 +42,10 @@ function UnrollingTimelineItem({ item, index }: { item: any, index: number }) {
 
 export default function EducationTimeline() {
   const journey = [
-    { year: "2022 — 2026", title: "Bachelor of Technology in Information Technology", subtitle: "JSS Academy of Technical Education , Noida", imageSrc: college },
-    { year: "2009 — 2022", title: "Highschool and Junior College", subtitle: "DAV Public School , Brijh Vihar", imageSrc: school }
+    { year: "May 2026 — Present", title: "AI Engineer Intern", subtitle: "Voxomos, Noida", imageSrc: voxomos },
+    { year: "Jan 2024 — Jul 2026", title: "General Secretary", subtitle: "Entrepreneurship Development Cell (EDC), JSSATEN", imageSrc: edc },
+    { year: "Oct 2022 — Jul 2026", title: "Bachelor of Technology in Information Technology", subtitle: "JSS Academy of Technical Education, Noida", imageSrc: college },
+    { year: "2009 — 2022", title: "Highschool and Junior College", subtitle: "DAV Public School, Brij Vihar", imageSrc: school }
   ];
 
   return (
