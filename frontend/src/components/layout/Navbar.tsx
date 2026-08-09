@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { Music, Menu, X, Sun, Moon } from 'lucide-react';
+import MusicPlayerCard from '../ui/music-player-card';
 
 interface NavbarProps {
   theme: string;
@@ -16,9 +17,20 @@ const navItems = [
 
 export default function Navbar({ theme, toggleTheme }: NavbarProps) {
   // Audio & Mobile State
+  const tracks = [
+    { title: "Golden Hour", artist: "JVKE", src: "/Golden Hour.mp3", cover: "/Golden Hour.png" },
+    { title: "Looser", artist: "Tame Impala", src: "/Looser -Tame impala.mp3", cover: "/Looser.png" }
+  ];
+
+  const [isMusicPlayerOpen, setIsMusicPlayerOpen] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  
+  const currentTrack = tracks[currentTrackIndex];
 
   // GSAP Refs
   const circleRefs = useRef<Array<HTMLSpanElement | null>>([]);
@@ -35,10 +47,46 @@ export default function Navbar({ theme, toggleTheme }: NavbarProps) {
   const toggleMusic = () => {
     if (isPlaying) {
       audioRef.current?.pause();
+      setIsPlaying(false);
+      setIsMusicPlayerOpen(false);
     } else {
-      audioRef.current?.play();
+      audioRef.current?.play().catch(console.error);
+      setIsPlaying(true);
+      setIsMusicPlayerOpen(true);
     }
-    setIsPlaying(!isPlaying);
+  };
+
+  const handleNextTrack = () => {
+    setCurrentTrackIndex((prev) => (prev + 1) % tracks.length);
+    setIsPlaying(true);
+  };
+
+  const handlePrevTrack = () => {
+    setCurrentTrackIndex((prev) => (prev - 1 + tracks.length) % tracks.length);
+    setIsPlaying(true);
+  };
+
+  useEffect(() => {
+    if (isPlaying && audioRef.current) {
+      audioRef.current.play().catch(console.error);
+    }
+  }, [currentTrackIndex, isPlaying]);
+
+  const handleTogglePlay = () => {
+    if (isPlaying) {
+      audioRef.current?.pause();
+      setIsPlaying(false);
+    } else {
+      audioRef.current?.play().catch(console.error);
+      setIsPlaying(true);
+    }
+  };
+
+  const handleAutoPlay = () => {
+    if (!isPlaying) {
+      audioRef.current?.play().catch(console.error);
+      setIsPlaying(true);
+    }
   };
 
   useEffect(() => {
@@ -124,7 +172,8 @@ export default function Navbar({ theme, toggleTheme }: NavbarProps) {
   } as React.CSSProperties;
 
   return (
-    <div className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[90%] md:w-auto">
+    <>
+      <div className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[90%] md:w-auto">
       <nav
         className="bg-white/80 dark:bg-[#111]/80 backdrop-blur-md border border-neutral-200 dark:border-neutral-800 rounded-3xl md:rounded-full px-4 py-3 flex items-center justify-between shadow-xl transition-all duration-300"
         aria-label="Primary"
@@ -182,7 +231,13 @@ export default function Navbar({ theme, toggleTheme }: NavbarProps) {
         </div>
 
         {/* Audio Element */}
-        <audio ref={audioRef} src="/bg-music.mp3" loop />
+        <audio 
+          ref={audioRef} 
+          src={currentTrack.src} 
+          onEnded={handleNextTrack}
+          onTimeUpdate={(e) => setCurrentTime(e.currentTarget.currentTime)}
+          onLoadedMetadata={(e) => setDuration(e.currentTarget.duration)}
+        />
 
         {/* Desktop Actions */}
         <div className="hidden md:flex items-center gap-2">
@@ -223,6 +278,19 @@ export default function Navbar({ theme, toggleTheme }: NavbarProps) {
           ))}
         </div>
       )}
-    </div>
+      </div>
+      <MusicPlayerCard 
+        isVisible={isMusicPlayerOpen} 
+        onClose={() => setIsMusicPlayerOpen(false)} 
+        isPlaying={isPlaying}
+        togglePlay={handleTogglePlay}
+        onAutoPlay={handleAutoPlay}
+        currentTrack={currentTrack}
+        onNext={handleNextTrack}
+        onPrev={handlePrevTrack}
+        currentTime={currentTime}
+        duration={duration}
+      />
+    </>
   );
 }

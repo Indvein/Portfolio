@@ -12,3 +12,33 @@
   @theme {
     --font-sans: "Space Grotesk", sans-serif;
   }
+
+@keyframes bounce {
+  0%,
+  100% {
+    height: 6px;
+  }
+  50% {
+    height: 26px;
+  }
+}
+
+@keyframes timer {
+  0% { content: "0:00"; }
+  100% { content: "0:45"; }
+}
+
+@keyframes timerDown {
+  0% { content: "0:45"; }
+  100% { content: "0:00"; }
+}
+
+@keyframes progressAnim {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes handleAnim {
+  from { left: 0%; }
+  to { left: 100%; }
+}
