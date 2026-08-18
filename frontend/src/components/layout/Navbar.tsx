@@ -17,6 +17,18 @@ const navItems = [
 ];
 
 export default function Navbar({ theme, toggleTheme }: NavbarProps) {
+  // Dynamic Logo State
+  const faces = [
+    "( ͡❛ ⏥ ͡❛)",
+    "( ˶° ᗝ °˶ )",
+    "(⌐■_■)",
+    "¯\\_(ツ)_/¯",
+    "ʕ•ᴥ•ʔ",
+    "(ง'̀-'́)ง",
+    "(~˘▾˘)~"
+  ];
+  const [faceIndex, setFaceIndex] = useState(0);
+
   // Audio & Mobile State
   const tracks = [
     { title: "Golden Hour", artist: "JVKE", src: "/Golden Hour.mp3", cover: "/Golden Hour.png" },
@@ -181,8 +193,20 @@ export default function Navbar({ theme, toggleTheme }: NavbarProps) {
         style={cssVars}
       >
         {/* Logo */}
-        <span className="font-bold tracking-wider text-black dark:text-white mr-4 md:mr-8 ml-2">
-        ( ͡❛ ⏥ ͡❛)   </span>
+        <a 
+          href="/"
+          className="font-bold tracking-wider text-black dark:text-white mr-auto md:mr-8 ml-2 whitespace-nowrap cursor-pointer transition-opacity hover:opacity-70 select-none"
+          onClick={(e) => {
+            // Optional: smooth scroll to top instead of hard reload if on same page
+            if (window.location.pathname === '/') {
+              e.preventDefault();
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+          }}
+          onMouseEnter={() => setFaceIndex((prev) => (prev + 1) % faces.length)}
+        >
+          {faces[faceIndex]}
+        </a>
 
         {/* Desktop GSAP Links */}
         <div className="relative items-center rounded-full hidden md:flex mr-8" style={{ height: 'var(--nav-h)' }}>

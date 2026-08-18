@@ -10,7 +10,7 @@ import EducationTimeline from "./components/custom/EducationTimeline";
 import PublicationsSection from "./components/custom/PublicationsSection";
 import ContactFooter from "./components/custom/ContactFooter";
 import Lanyard from "./components/custom/Lanyard";
-import Aurora from "./components/custom/Aurora"; 
+import Threads from "./components/ui/Threads";
 import Loader from "./components/custom/Loader";
 import ScrollProgress from "./components/custom/ScrollProgress";
 import ResumeModal from "./components/custom/ResumeModal";
@@ -42,12 +42,12 @@ export default function App() {
       {/* 4. We hide the scrollbar while loading so the user can't scroll the page behind the loader */}
       <div className={`min-h-screen bg-neutral-50 dark:bg-[#070707] text-neutral-900 dark:text-neutral-50 font-sans selection:bg-blue-500/30 selection:text-white pb-12 overflow-x-hidden transition-colors duration-500 ${isLoading ? "h-screen overflow-hidden" : ""}`}>
         
-        <div className="fixed inset-0 z-0 pointer-events-none opacity-40 dark:opacity-60 transition-opacity duration-1000">
-          <Aurora 
-            colorStops={theme === "dark" ? ["#5227FF", "#7cff67", "#5227FF"] : ["#93C5FD", "#C4B5FD", "#93C5FD"]}
-            amplitude={1.2} 
-            blend={0.5} 
-            speed={0.5} 
+        <div className="fixed inset-0 z-0 pointer-events-none transition-opacity duration-1000 overflow-hidden">
+          <Threads
+            amplitude={1.2}
+            distance={0.1}
+            enableMouseInteraction={true}
+            color={theme === "dark" ? [1, 1, 1] : [0, 0, 0]}
           />
         </div>
 

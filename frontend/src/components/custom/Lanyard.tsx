@@ -109,7 +109,8 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }) {
       [j1, j2].forEach(ref => {
         if (!ref.current.lerped) ref.current.lerped = new THREE.Vector3().copy(ref.current.translation());
         const clampedDistance = Math.max(0.1, Math.min(1, ref.current.lerped.distanceTo(ref.current.translation())));
-        ref.current.lerped.lerp(ref.current.translation(), delta * (minSpeed + clampedDistance * (maxSpeed - minSpeed)));
+        const lerpFactor = Math.min(1, delta * (minSpeed + clampedDistance * (maxSpeed - minSpeed)));
+        ref.current.lerped.lerp(ref.current.translation(), lerpFactor);
       });
       curve.points[0].copy(j3.current.translation());
       curve.points[1].copy(j2.current.lerped);
