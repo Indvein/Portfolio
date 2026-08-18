@@ -7,14 +7,17 @@ import AboutMe from "./components/custom/AboutMe";
 import Skills from "./components/custom/Skills";
 import ProjectSection from "./components/custom/ProjectSection";
 import EducationTimeline from "./components/custom/EducationTimeline";
+import PublicationsSection from "./components/custom/PublicationsSection";
 import ContactFooter from "./components/custom/ContactFooter";
 import Lanyard from "./components/custom/Lanyard";
 import Aurora from "./components/custom/Aurora"; 
 import Loader from "./components/custom/Loader";
 import ScrollProgress from "./components/custom/ScrollProgress";
+import ResumeModal from "./components/custom/ResumeModal";
 
 export default function App() {
-  const [isLoading, setIsLoading] = useState(true); // <-- 2. Add loading state
+  const [isLoading, setIsLoading] = useState(true);
+  const [isResumeOpen, setIsResumeOpen] = useState(false); // <-- 2. Add loading state
 
   const [theme, setTheme] = useState(() => {
     if (typeof window !== "undefined") return localStorage.getItem("theme") || "dark";
@@ -31,6 +34,7 @@ export default function App() {
 
   return (
     <>
+      <ResumeModal isOpen={isResumeOpen} onClose={() => setIsResumeOpen(false)} />
       <ScrollProgress />
       {/* 3. Drop the Loader right at the top */}
       <Loader onComplete={() => setIsLoading(false)} />
@@ -58,14 +62,13 @@ export default function App() {
               <h2 className="text-3xl md:text-4xl text-neutral-600 dark:text-neutral-500 font-semibold tracking-tight mb-6 pointer-events-auto transition-colors">Software Developer</h2>
               <p className="text-neutral-600 dark:text-neutral-400 max-w-lg text-lg font-light mb-10 pointer-events-auto leading-relaxed transition-colors">I'm a BTech graduate focused on building clean, intuitive web apps with React and Python.</p>
               <div className="flex flex-wrap items-center gap-4 mb-8 pointer-events-auto">
-                <a
-                  href= "https://drive.google.com/file/d/1Ltw2dWwAVvHnbS-2aXLyJBLnuMG23z5b/view?usp=sharing"
-                  target="_blank"
-                  rel="noreferrer"
+                <button
+                  onClick={() => setIsResumeOpen(true)}
                   className="px-8 py-3 bg-black dark:bg-white text-white dark:text-black text-sm font-bold rounded-md hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-colors"
-                >View Resume</a>
+                >View Resume</button>
                 <a
-                  href="https://drive.google.com/uc?export=download&id=1Ltw2dWwAVvHnbS-2aXLyJBLnuMG23z5b"
+                  href="/resume.pdf"
+                  download="Harsh_Jha_Resume.pdf"
                   className="px-8 py-3 bg-transparent text-black dark:text-white text-sm font-bold rounded-md border border-black dark:border-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-800 transition-colors"
                 >Download Resume</a>
               </div>
@@ -87,6 +90,7 @@ export default function App() {
           <Skills />
           <AboutMe />
           <ProjectSection />
+          <PublicationsSection />
           <EducationTimeline />
           <ContactFooter />
         </main>
