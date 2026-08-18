@@ -7,6 +7,8 @@ interface ResumeModalProps {
   onClose: () => void;
 }
 
+import resumeLocalUrl from "@/assets/Harsh_resume_new.pdf";
+
 export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
   // Lock body scroll when open
   useEffect(() => {
@@ -24,12 +26,6 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [onClose]);
-
-  // Google Docs viewer renders any publicly accessible PDF smoothly on all devices
-  // Since our PDF is local we use the direct path — works great on desktop
-  // On mobile we fall back to a download prompt
-  const resumeLocalUrl = "/resume.pdf";
-  const googleViewerUrl = `https://docs.google.com/viewer?url=https://drive.google.com/uc?id=1Ltw2dWwAVvHnbS-2aXLyJBLnuMG23z5b&embedded=true`;
 
   return (
     <AnimatePresence>
@@ -95,13 +91,12 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
                 <div className="w-8 h-8 rounded-full border-2 border-neutral-300 dark:border-neutral-700 border-t-blue-500 animate-spin" />
                 <span className="text-xs font-mono">Loading…</span>
               </div>
-              {/* Google Docs viewer — smooth, mobile-friendly */}
+              {/* Local PDF Viewer */}
               <iframe
                 key={isOpen ? "open" : "closed"}
-                src={googleViewerUrl}
+                src={resumeLocalUrl}
                 className="relative z-10 w-full h-full border-none"
                 title="Harsh Jha Resume"
-                allow="autoplay"
               />
             </div>
           </motion.div>
